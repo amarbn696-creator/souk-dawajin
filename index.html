@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="سوق الدواجن الجزائري - بيع وشراء الدواجن والبيض والأعلاف">
+<title>سوق الدواجن DZ 🐓</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1a6b2e;
+  --primary-light: #2d9144;
+  --primary-dark: #0f4a1e;
+  --accent: #e8a020;
+  --bg: #f4f6f0;
+  --card: #fff;
+  --text: #1a2e1a;
+  --text2: #4a6050;
+  --text3: #8aaa8a;
+  --border: #d8e8d8;
+  --shadow: 0 2px 10px rgba(0,0,0,0.08);
+  --radius: 14px;
+  --radius-sm: 9px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;max-width:480px;margin:0 auto;overflow-x:hidden}
+
+/* HEADER */
+.header{background:var(--primary);padding:0 14px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 14px rgba(0,0,0,0.28)}
+.header-logo{display:flex;align-items:center;gap:9px}
+.logo-box{width:36px;height:36px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.header-logo h1{font-size:18px;font-weight:900;color:#fff;line-height:1.1}
+.header-logo p{font-size:10px;color:rgba(255,255,255,.7);font-weight:500}
+.header-actions{display:flex;gap:8px;align-items:center}
+.hbtn{width:38px;height:38px;background:rgba(255,255,255,.15);border:none;border-radius:10px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.hbtn:active{background:rgba(255,255,255,.28)}
+.profile-btn{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;transition:.15s}
+.profile-btn:active{opacity:.8}
+
+/* SEARCH */
+.search-section{background:var(--primary-dark);padding:10px 14px 14px}
+.search-wrap{display:flex;align-items:center;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.search-wrap input{flex:1;border:none;padding:11px 14px;font-family:'Cairo',sans-serif;font-size:14px;color:var(--text);outline:none;text-align:right;background:transparent}
+.search-wrap input::placeholder{color:#b0c0b0}
+.search-go{background:var(--accent);border:none;padding:11px 16px;cursor:pointer;font-size:15px;color:white;font-weight:800;font-family:'Cairo',sans-serif;transition:.15s}
+.search-go:active{opacity:.85}
+
+/* CATEGORIES */
+.cats{background:#fff;padding:10px 14px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border)}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex-shrink:0;padding:7px 13px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-family:'Cairo',sans-serif;font-weight:700;font-size:12.5px;cursor:pointer;transition:.2s;color:var(--text2);white-space:nowrap}
+.cat.active{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 3px 10px rgba(26,107,46,.3)}
+
+/* BANNER */
+.banner-wrap{padding:12px 14px}
+.banner{background:linear-gradient(135deg,#1a6b2e,#2d9144 60%,#e8a020);border-radius:var(--radius);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;min-height:95px}
+.banner::before{content:'';position:absolute;width:150px;height:150px;background:rgba(255,255,255,.07);border-radius:50%;top:-50px;left:-30px}
+.banner-text{position:relative;z-index:1}
+.banner-tag{display:inline-block;background:var(--accent);color:#fff;font-size:10px;font-weight:800;padding:2px 9px;border-radius:20px;margin-bottom:5px}
+.banner-text h2{font-size:19px;font-weight:900;color:#fff;line-height:1.2}
+.banner-text p{font-size:12px;color:rgba(255,255,255,.85);margin-top:3px}
+.banner-emoji{font-size:60px;position:relative;z-index:1;filter:drop-shadow(0 4px 8px rgba(0,0,0,.2))}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat{background:#fff;padding:10px 6px;text-align:center}
+.stat .n{font-size:17px;font-weight:900;color:var(--primary);line-height:1}
+.stat .l{font-size:10px;color:var(--text3);margin-top:2px;font-weight:600}
+
+/* POST BAR */
+.post-bar{background:var(--primary-dark);padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.post-bar p{font-size:13px;color:rgba(255,255,255,.85);font-weight:600;flex:1}
+.post-bar p strong{color:#fff}
+.post-bar-btn{background:var(--accent);border:none;padding:10px 18px;border-radius:22px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:800;color:#fff;cursor:pointer;white-space:nowrap;box-shadow:0 3px 10px rgba(232,160,32,.4);transition:.15s;flex-shrink:0}
+.post-bar-btn:active{transform:scale(.95)}
+
+/* SECTION HEADER */
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 14px 8px}
+.sec-hdr h3{font-size:15px;font-weight:800;display:flex;align-items:center;gap:6px}
+.sec-hdr span{font-size:12px;color:var(--text3);font-weight:600}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 10px}
+
+/* CARD */
+.card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border);cursor:pointer;transition:transform .2s;animation:rise .35s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.card:active{transform:scale(.97)}
+.card-img{position:relative;height:128px;background:#e8f2e8;display:flex;align-items:center;justify-content:center;font-size:52px}
+.badge{position:absolute;top:7px;right:7px;font-size:9.5px;font-weight:800;padding:3px 8px;border-radius:20px}
+.badge-new{background:#c0392b;color:#fff}
+.fav-btn{position:absolute;bottom:7px;left:7px;width:28px;height:28px;background:rgba(255,255,255,.92);border:none;border-radius:50%;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);transition:transform .2s}
+.fav-btn:active{transform:scale(1.3)}
+.card-body{padding:9px 9px 8px}
+.card-cat{font-size:10.5px;color:var(--primary-light);font-weight:700;margin-bottom:2px}
+.card-title{font-size:13.5px;font-weight:800;line-height:1.3;margin-bottom:3px}
+.card-desc{font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.card-price{font-size:15px;font-weight:900;color:var(--primary)}
+.card-price .unit{font-size:10px;font-weight:600;color:var(--text2)}
+.card-loc{font-size:10px;color:var(--text3);font-weight:600}
+.card-actions{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.btn-det{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:7px 4px;font-family:'Cairo',sans-serif;font-size:11.5px;font-weight:700;color:var(--text2);cursor:pointer}
+.btn-det:active{background:#f0f4f0}
+.btn-wa{background:#25D366;border:none;border-radius:var(--radius-sm);padding:7px 4px;font-family:'Cairo',sans-serif;font-size:11.5px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px}
+.btn-wa:active{background:#1ab855}
+
+/* EMPTY STATE */
+.empty{padding:50px 20px;text-align:center}
+.empty .eicon{font-size:64px;display:block;margin-bottom:14px}
+.empty h3{font-size:16px;font-weight:800;color:var(--text2);margin-bottom:7px}
+.empty p{font-size:13px;color:var(--text3);line-height:1.7}
+.empty-btn{margin-top:18px;background:var(--primary);color:#fff;border:none;padding:12px 28px;border-radius:22px;font-family:'Cairo',sans-serif;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(26,107,46,.3)}
+.empty-btn:active{transform:scale(.95)}
+
+/* FAB */
+.fab{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:150;background:linear-gradient(135deg,var(--accent),#f5a623);color:#fff;border:none;padding:13px 26px;border-radius:30px;font-family:'Cairo',sans-serif;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 6px 24px rgba(232,160,32,.55);white-space:nowrap;animation:fabP 3s ease-in-out infinite}
+@keyframes fabP{0%,100%{box-shadow:0 6px 24px rgba(232,160,32,.55)}50%{box-shadow:0 6px 30px rgba(232,160,32,.8)}}
+
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);padding:6px 0 10px;box-shadow:0 -4px 20px rgba(0,0,0,.08);z-index:200}
+.nitem{display:flex;flex-direction:column;align-items:center;gap:2px;padding:3px 4px;cursor:pointer;border:none;background:none;font-family:'Cairo',sans-serif;transition:.15s}
+.nitem:active{opacity:.7}
+.nitem .ni{font-size:21px}
+.nitem .nl{font-size:9.5px;font-weight:700;color:var(--text3)}
+.nitem.active .nl{color:var(--primary)}
+
+/* OVERLAY */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:flex-end;justify-content:center;backdrop-filter:blur(2px)}
+.overlay.open{display:flex}
+.modal{background:#fff;width:100%;max-width:480px;border-radius:22px 22px 0 0;animation:mUp .28s ease;max-height:92vh;overflow-y:auto;padding-bottom:30px}
+@keyframes mUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.mhandle{width:38px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0}
+.mhdr{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.mhdr h3{font-size:16px;font-weight:800}
+.mclose{width:30px;height:30px;background:var(--bg);border:none;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+/* CONTACT */
+.copt{display:flex;align-items:center;gap:14px;padding:14px 18px;border:none;background:#fff;width:100%;cursor:pointer;border-bottom:1px solid var(--border);font-family:'Cairo',sans-serif;transition:.15s;text-align:right}
+.copt:active{background:#f4f6f0}
+.copt-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.cwa .copt-icon{background:#e8faf0}
+.ccall .copt-icon{background:#e8f0ff}
+.cmsg .copt-icon{background:#fff5e8}
+.copt-txt strong{display:block;font-size:14px;font-weight:800;color:var(--text)}
+.copt-txt span{font-size:11.5px;color:var(--text2)}
+
+/* FORM */
+.fg{padding:10px 18px 0}
+.fg label{display:block;font-size:12.5px;font-weight:700;color:var(--text2);margin-bottom:5px}
+.fg input,.fg select,.fg textarea{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Cairo',sans-serif;font-size:13.5px;color:var(--text);outline:none;transition:.15s;background:#fff}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--primary-light);box-shadow:0 0 0 3px rgba(45,145,68,.1)}
+.fg textarea{min-height:80px;resize:none}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:0 10px;padding:10px 18px 0}
+.frow .fg{padding:0}
+.fsub{margin:16px 18px 0;width:calc(100% - 36px);background:var(--primary);border:none;border-radius:var(--radius);padding:14px;font-family:'Cairo',sans-serif;font-size:15px;font-weight:800;color:#fff;cursor:pointer}
+.fsub:active{background:var(--primary-dark)}
+
+/* DETAIL */
+.det-img{width:100%;height:180px;display:flex;align-items:center;justify-content:center;font-size:78px;background:linear-gradient(145deg,#e8f2e8,#d0e8d0)}
+.det-body{padding:16px 18px}
+.det-cat{font-size:11px;color:var(--primary-light);font-weight:700;margin-bottom:4px}
+.det-title{font-size:20px;font-weight:900;margin-bottom:8px}
+.det-price{font-size:24px;font-weight:900;color:var(--primary);margin-bottom:12px}
+.det-price span{font-size:13px;font-weight:600;color:var(--text2)}
+.det-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.det-row .dl{color:var(--text3);font-weight:600;width:80px;flex-shrink:0}
+.det-row .dv{color:var(--text);font-weight:700}
+.det-desc{margin-top:12px;font-size:13px;line-height:1.8;color:var(--text2)}
+.det-acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.det-wa{background:#25D366;border:none;border-radius:var(--radius);padding:14px;font-family:'Cairo',sans-serif;font-size:14px;font-weight:800;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.det-call{background:#fff;border:2px solid var(--primary);border-radius:var(--radius);padding:14px;font-family:'Cairo',sans-serif;font-size:14px;font-weight:800;color:var(--primary);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.det-del{margin-top:10px;width:100%;background:#fff;border:2px solid #c0392b;color:#c0392b;border-radius:12px;padding:11px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer}
+.det-del:active{background:#fdf0f0}
+
+/* PROFILE */
+.prof-hdr{padding:24px 18px 18px;text-align:center;border-bottom:1px solid var(--border)}
+.prof-av{width:72px;height:72px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 12px}
+.prof-hdr h3{font-size:18px;font-weight:900}
+.prof-hdr p{font-size:12px;color:var(--text3);margin-top:3px}
+.pitem{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--border);cursor:pointer;font-family:'Cairo',sans-serif;transition:.15s;border:none;background:#fff;width:100%;text-align:right}
+.pitem:active{background:#f4f6f0}
+.pitem .pi{font-size:22px;width:36px;text-align:center}
+.pitem .pt strong{display:block;font-size:14px;font-weight:800;color:var(--text)}
+.pitem .pt span{font-size:11.5px;color:var(--text2)}
+.pbadge{margin-right:auto;background:var(--primary);color:#fff;font-size:11px;font-weight:800;padding:2px 9px;border-radius:20px;font-family:'Cairo',sans-serif}
+
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a2e1a;color:#fff;padding:10px 20px;border-radius:22px;font-size:13px;font-weight:700;font-family:'Cairo',sans-serif;z-index:999;opacity:0;transition:.3s;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.footer-space{height:90px}
+@media(max-width:360px){.card-img{height:110px}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-logo">
+    <div class="logo-box">🐓</div>
+    <div>
+      <h1>سوق الدواجن DZ</h1>
+      <p>بيع · شراء · تبادل</p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="hbtn" onclick="showToast('🔔 لا توجد إشعارات جديدة')">🔔</button>
+    <div class="profile-btn" onclick="openProfile()">👤</div>
+  </div>
+</header>
+
+<!-- SEARCH -->
+<div class="search-section">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="ابحث: دجاج، بيض، ديك رومي..." oninput="doSearch(this.value)">
+    <button class="search-go">🔍 بحث</button>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="cats">
+  <button class="cat active" onclick="filterCat(this,'all')">🏪 الكل</button>
+  <button class="cat" onclick="filterCat(this,'lahm')">🐓 لاحم</button>
+  <button class="cat" onclick="filterCat(this,'biyad')">🐔 بياض</button>
+  <button class="cat" onclick="filterCat(this,'beyad')">🥚 بيض</button>
+  <button class="cat" onclick="filterCat(this,'turki')">🦃 ديك رومي</button>
+  <button class="cat" onclick="filterCat(this,'bat')">🦆 بط / إوز</button>
+  <button class="cat" onclick="filterCat(this,'alam')">🌾 أعلاف</button>
+  <button class="cat" onclick="filterCat(this,'moaad')">🏗️ معدات</button>
+</div>
+
+<!-- BANNER -->
+<div class="banner-wrap">
+  <div class="banner">
+    <div class="banner-text">
+      <div class="banner-tag">✨ مرحباً بكم</div>
+      <h2>سوق الدواجن<br>الجزائري</h2>
+      <p>أنشر إعلانك مجاناً الآن</p>
+    </div>
+    <div class="banner-emoji">🐓</div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="n" id="statAds">0</div><div class="l">إعلان نشط</div></div>
+  <div class="stat"><div class="n">48</div><div class="l">ولاية</div></div>
+  <div class="stat"><div class="n" id="statSellers">0</div><div class="l">بائع مسجّل</div></div>
+</div>
+
+<!-- POST BAR -->
+<div class="post-bar">
+  <p><strong>هل تريد البيع؟</strong> أنشر إعلانك مجاناً</p>
+  <button class="post-bar-btn" onclick="openPostModal()">➕ نشر إعلان</button>
+</div>
+
+<!-- ADS -->
+<div class="sec-hdr">
+  <h3 id="secTitle">📢 الإعلانات</h3>
+  <span id="adsCount"></span>
+</div>
+<div class="grid" id="adsGrid"></div>
+<div id="emptyState" style="display:none">
+  <div class="empty">
+    <span class="eicon">🐣</span>
+    <h3>لا توجد إعلانات بعد</h3>
+    <p>كن أول من ينشر إعلاناً في سوق الدواجن الجزائري</p>
+    <button class="empty-btn" onclick="openPostModal()">➕ أنشر أول إعلان</button>
+  </div>
+</div>
+
+<div class="footer-space"></div>
+<button class="fab" onclick="openPostModal()">➕ نشر إعلان مجاناً</button>
+
+<!-- BOTTOM NAV -->
+<nav class="bnav">
+  <button class="nitem active" onclick="setNav(this);showAll()"><span class="ni">🏠</span><span class="nl">الرئيسية</span></button>
+  <button class="nitem" onclick="setNav(this);focusSearch()"><span class="ni">🔍</span><span class="nl">بحث</span></button>
+  <button class="nitem" onclick="setNav(this);showFavs()"><span class="ni">❤️</span><span class="nl">المفضلة</span></button>
+  <button class="nitem" onclick="setNav(this);openProfile()"><span class="ni">👤</span><span class="nl">حسابي</span></button>
+</nav>
+
+<!-- CONTACT MODAL -->
+<div class="overlay" id="oContact" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <div class="mhdr">
+      <h3 id="contactTitle">تواصل مع البائع</h3>
+      <button class="mclose" onclick="document.getElementById('oContact').classList.remove('open')">✕</button>
+    </div>
+    <button class="copt cwa" onclick="doWA()">
+      <div class="copt-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.097.541 4.066 1.487 5.783L.057 23.5l5.86-1.537A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.007-1.368l-.36-.214-3.477.912.928-3.386-.234-.349A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      </div>
+      <div class="copt-txt"><strong>واتساب</strong><span>تواصل مباشر مع البائع</span></div>
+    </button>
+    <button class="copt ccall" onclick="doCall()">
+      <div class="copt-icon">📞</div>
+      <div class="copt-txt"><strong>اتصال هاتفي</strong><span>اتصل بالبائع مباشرة</span></div>
+    </button>
+    <button class="copt cmsg" onclick="document.getElementById('oContact').classList.remove('open');showToast('💬 تم إرسال رسالتك')">
+      <div class="copt-icon">✉️</div>
+      <div class="copt-txt"><strong>رسالة داخلية</strong><span>أرسل رسالة عبر التطبيق</span></div>
+    </button>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="overlay" id="oDetail" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <div class="mhdr">
+      <h3>تفاصيل الإعلان</h3>
+      <button class="mclose" onclick="document.getElementById('oDetail').classList.remove('open')">✕</button>
+    </div>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<!-- POST MODAL -->
+<div class="overlay" id="oPost" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <div class="mhdr">
+      <h3>➕ نشر إعلان جديد</h3>
+      <button class="mclose" onclick="document.getElementById('oPost').classList.remove('open')">✕</button>
+    </div>
+    <div class="fg"><label>عنوان الإعلان *</label><input type="text" id="f_title" placeholder="مثال: دجاج بلدي للبيع بوهران" maxlength="80"></div>
+    <div class="fg">
+      <label>الفئة *</label>
+      <select id="f_cat">
+        <option value="">-- اختر الفئة --</option>
+        <option value="lahm">🐓 دجاج لاحم</option>
+        <option value="biyad">🐔 دجاج بياض</option>
+        <option value="beyad">🥚 بيض</option>
+        <option value="turki">🦃 ديوك رومي</option>
+        <option value="bat">🦆 بط وإوز</option>
+        <option value="alam">🌾 أعلاف</option>
+        <option value="moaad">🏗️ معدات الدواجن</option>
+        <option value="other">📦 أخرى</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>الولاية *</label>
+      <select id="f_loc">
+        <option value="">-- اختر الولاية --</option>
+        <option>أدرار</option><option>الشلف</option><option>الأغواط</option><option>أم البواقي</option>
+        <option>باتنة</option><option>بجاية</option><option>بسكرة</option><option>بشار</option>
+        <option>البليدة</option><option>البويرة</option><option>تمنراست</option><option>تبسة</option>
+        <option>تلمسان</option><option>تيارت</option><option>تيزي وزو</option><option>الجزائر العاصمة</option>
+        <option>الجلفة</option><option>جيجل</option><option>سطيف</option><option>سعيدة</option>
+        <option>سكيكدة</option><option>سيدي بلعباس</option><option>عنابة</option><option>قالمة</option>
+        <option>قسنطينة</option><option>المدية</option><option>مستغانم</option><option>المسيلة</option>
+        <option>معسكر</option><option>ورقلة</option><option>وهران</option><option>البيض</option>
+        <option>إليزي</option><option>برج بوعريريج</option><option>بومرداس</option><option>الطارف</option>
+        <option>تندوف</option><option>تيسمسيلت</option><option>الوادي</option><option>خنشلة</option>
+        <option>سوق أهراس</option><option>تيبازة</option><option>ميلة</option><option>عين الدفلى</option>
+        <option>النعامة</option><option>عين تموشنت</option><option>غرداية</option><option>غليزان</option>
+      </select>
+    </div>
+    <div class="frow">
+      <div class="fg"><label>السعر (دج) *</label><input type="number" id="f_price" placeholder="5000" min="0"></div>
+      <div class="fg"><label>الوحدة</label>
+        <select id="f_unit">
+          <option>للقطعة</option><option>للكغ</option><option>للكرتون</option><option>للكيس</option><option>للطن</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg"><label>رقم الهاتف / واتساب *</label><input type="tel" id="f_phone" placeholder="05XXXXXXXX" maxlength="10"></div>
+    <div class="fg"><label>الاسم (اختياري)</label><input type="text" id="f_name" placeholder="اسمك أو اسم المزرعة" maxlength="40"></div>
+    <div class="fg"><label>وصف الإعلان</label><textarea id="f_desc" placeholder="الكمية، الحالة، شروط التسليم..."></textarea></div>
+    <button class="fsub" onclick="submitAd()">✅ نشر الإعلان مجاناً</button>
+    <div style="height:10px"></div>
+  </div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="overlay" id="oProfile" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <div class="mhdr">
+      <h3>الملف الشخصي</h3>
+      <button class="mclose" onclick="document.getElementById('oProfile').classList.remove('open')">✕</button>
+    </div>
+    <div class="prof-hdr">
+      <div class="prof-av">👤</div>
+      <h3>زائر</h3>
+      <p>مرحباً بك في سوق الدواجن DZ</p>
+    </div>
+    <button class="pitem" onclick="document.getElementById('oProfile').classList.remove('open');openPostModal()">
+      <span class="pi">➕</span>
+      <div class="pt"><strong>نشر إعلان</strong><span>أضف إعلانك مجاناً الآن</span></div>
+    </button>
+    <button class="pitem" onclick="document.getElementById('oProfile').classList.remove('open');showMyAds()">
+      <span class="pi">📋</span>
+      <div class="pt"><strong>إعلاناتي</strong><span>عرض إعلاناتك المنشورة</span></div>
+      <span class="pbadge" id="myAdsCount">0</span>
+    </button>
+    <button class="pitem" onclick="document.getElementById('oProfile').classList.remove('open');showFavs()">
+      <span class="pi">❤️</span>
+      <div class="pt"><strong>المفضلة</strong><span>الإعلانات المحفوظة</span></div>
+      <span class="pbadge" id="favCount">0</span>
+    </button>
+    <button class="pitem" onclick="showToast('⚙️ الإعدادات قريباً')">
+      <span class="pi">⚙️</span>
+      <div class="pt"><strong>الإعدادات</strong><span>اللغة والإشعارات</span></div>
+    </button>
+    <button class="pitem" onclick="showToast('ℹ️ سوق الدواجن DZ — النسخة 1.0')">
+      <span class="pi">ℹ️</span>
+      <div class="pt"><strong>حول التطبيق</strong><span>سوق الدواجن DZ — النسخة 1.0</span></div>
+    </button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const ICONS = {lahm:'🐓',biyad:'🐔',beyad:'🥚',turki:'🦃',bat:'🦆',alam:'🌾',moaad:'🏗️',other:'📦'};
+const NAMES = {lahm:'دجاج لاحم',biyad:'دجاج بياض',beyad:'بيض',turki:'ديوك رومي',bat:'بط وإوز',alam:'أعلاف',moaad:'معدات',other:'أخرى'};
+
+let ads  = JSON.parse(localStorage.getItem('dz_ads')||'[]');
+let favs = JSON.parse(localStorage.getItem('dz_favs')||'[]');
+let curPhone='', curTitle='';
+let curCat='all', curSearch='', viewMode='all';
+
+const save = () => localStorage.setItem('dz_ads', JSON.stringify(ads));
+const saveFavs = () => localStorage.setItem('dz_favs', JSON.stringify(favs));
+
+function render(){
+  let list = [...ads].reverse();
+  if(viewMode==='favs') list = list.filter(a=>favs.includes(a.id));
+  if(viewMode==='mine') list = list.filter(a=>a.mine);
+  if(curCat!=='all')    list = list.filter(a=>a.cat===curCat);
+  if(curSearch)         list = list.filter(a=>(a.title+a.desc+a.loc+(NAMES[a.cat]||'')).toLowerCase().includes(curSearch));
+
+  document.getElementById('statAds').textContent     = ads.length;
+  document.getElementById('statSellers').textContent = [...new Set(ads.map(a=>a.phone))].length;
+  document.getElementById('myAdsCount').textContent  = ads.filter(a=>a.mine).length;
+  document.getElementById('favCount').textContent    = favs.length;
+
+  const grid  = document.getElementById('adsGrid');
+  const empty = document.getElementById('emptyState');
+  const cnt   = document.getElementById('adsCount');
+
+  if(!list.length){ grid.innerHTML=''; empty.style.display=''; cnt.textContent=''; return; }
+  empty.style.display='none';
+  cnt.textContent = list.length+' إعلان';
+
+  grid.innerHTML = list.map((ad,i)=>{
+    const ic = ICONS[ad.cat]||'📦';
+    const nm = NAMES[ad.cat]||'أخرى';
+    const isFav = favs.includes(ad.id);
+    return `
+    <div class="card" style="animation-delay:${Math.min(i*.05,.4)}s" onclick="openDetail('${ad.id}')">
+      <div class="card-img">
+        <span>${ic}</span>
+        ${i===0&&viewMode==='all'?'<span class="badge badge-new">🆕 جديد</span>':''}
+        <button class="fav-btn" onclick="event.stopPropagation();toggleFav('${ad.id}',this)">${isFav?'❤️':'🤍'}</button>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">${nm}</div>
+        <div class="card-title">${esc(ad.title)}</div>
+        <div class="card-desc">${esc(ad.desc||'')}</div>
+        <div class="card-meta">
+          <div class="card-price">${fmtN(ad.price)} <span class="unit">دج/${esc(ad.unit||'')}</span></div>
+          <div class="card-loc">📍 ${esc(ad.loc)}</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-det" onclick="event.stopPropagation();openDetail('${ad.id}')">التفاصيل</button>
+          <button class="btn-wa"  onclick="event.stopPropagation();contactModal('${ad.id}')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.097.541 4.066 1.487 5.783L.057 23.5l5.86-1.537A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.007-1.368l-.36-.214-3.477.912.928-3.386-.234-.349A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            واتساب
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterCat(btn, cat){
+  curCat=cat; viewMode='all';
+  document.querySelectorAll('.cat').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('secTitle').textContent='📢 الإعلانات';
+  render();
+}
+
+function doSearch(q){ curSearch=q.trim().toLowerCase(); render(); }
+function focusSearch(){ document.getElementById('searchInput').focus(); }
+
+function showAll(){
+  viewMode='all'; curCat='all'; curSearch='';
+  document.getElementById('searchInput').value='';
+  document.querySelectorAll('.cat').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.cat').classList.add('active');
+  document.getElementById('secTitle').textContent='📢 الإعلانات';
+  render();
+}
+
+function showFavs(){
+  viewMode='favs';
+  document.getElementById('secTitle').textContent='❤️ المفضلة';
+  render();
+}
+
+function showMyAds(){
+  viewMode='mine';
+  document.getElementById('secTitle').textContent='📋 إعلاناتي';
+  render();
+}
+
+function toggleFav(id, btn){
+  const i = favs.indexOf(id);
+  if(i===-1){ favs.push(id); btn.textContent='❤️'; showToast('❤️ أُضيف للمفضلة'); }
+  else       { favs.splice(i,1); btn.textContent='🤍'; showToast('💔 أُزيل من المفضلة'); }
+  saveFavs();
+  document.getElementById('favCount').textContent=favs.length;
+}
+
+function contactModal(id){
+  const ad=ads.find(a=>a.id===id); if(!ad) return;
+  curPhone=ad.phone; curTitle=ad.title;
+  document.getElementById('contactTitle').textContent='📢 '+ad.title;
+  document.getElementById('oContact').classList.add('open');
+}
+
+function doWA(){
+  const msg=encodeURIComponent('السلام عليكم، رأيت إعلانكم على سوق الدواجن DZ بخصوص: '+curTitle+'. هل لا يزال متاحاً؟');
+  window.open('https://wa.me/'+curPhone.replace(/^0/,'213')+'?text='+msg,'_blank');
+  document.getElementById('oContact').classList.remove('open');
+}
+
+function doCall(){
+  window.location.href='tel:'+curPhone;
+  document.getElementById('oContact').classList.remove('open');
+}
+
+function openDetail(id){
+  const ad=ads.find(a=>a.id===id); if(!ad) return;
+  const ic=ICONS[ad.cat]||'📦', nm=NAMES[ad.cat]||'أخرى';
+  document.getElementById('detailContent').innerHTML=`
+    <div class="det-img">${ic}</div>
+    <div class="det-body">
+      <div class="det-cat">${nm}</div>
+      <div class="det-title">${esc(ad.title)}</div>
+      <div class="det-price">${fmtN(ad.price)} دج <span>/ ${esc(ad.unit||'')}</span></div>
+      <div class="det-row"><span class="dl">📍 الموقع</span><span class="dv">${esc(ad.loc)}</span></div>
+      <div class="det-row"><span class="dl">📂 الفئة</span><span class="dv">${nm}</span></div>
+      <div class="det-row"><span class="dl">👤 البائع</span><span class="dv">${esc(ad.name||'بائع')}</span></div>
+      <div class="det-row"><span class="dl">📞 الهاتف</span><span class="dv">${esc(ad.phone)}</span></div>
+      <div class="det-row"><span class="dl">🕐 النشر</span><span class="dv">${timeAgo(ad.date)}</span></div>
+      <div class="det-desc">${esc(ad.desc||'لا يوجد وصف إضافي.')}</div>
+      <div class="det-acts">
+        <button class="det-wa" onclick="openWA('${ad.phone}','${esc(ad.title).replace(/'/g,'')}')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.097.541 4.066 1.487 5.783L.057 23.5l5.86-1.537A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.007-1.368l-.36-.214-3.477.912.928-3.386-.234-.349A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          واتساب
+        </button>
+        <button class="det-call" onclick="window.location.href='tel:${ad.phone}'">📞 اتصال</button>
+      </div>
+      ${ad.mine?`<button class="det-del" onclick="deleteAd('${ad.id}')">🗑️ حذف إعلاني</button>`:''}
+    </div>`;
+  document.getElementById('oDetail').classList.add('open');
+}
+
+function openWA(phone,title){
+  const msg=encodeURIComponent('السلام عليكم، رأيت إعلانكم على سوق الدواجن DZ بخصوص: '+title+'. هل لا يزال متاحاً؟');
+  window.open('https://wa.me/'+phone.replace(/^0/,'213')+'?text='+msg,'_blank');
+}
+
+function deleteAd(id){
+  if(!confirm('هل تريد حذف هذا الإعلان نهائياً؟')) return;
+  ads=ads.filter(a=>a.id!==id); save();
+  document.getElementById('oDetail').classList.remove('open');
+  render(); showToast('🗑️ تم حذف الإعلان');
+}
+
+function openPostModal(){ document.getElementById('oPost').classList.add('open'); }
+
+function submitAd(){
+  const title=document.getElementById('f_title').value.trim();
+  const cat  =document.getElementById('f_cat').value;
+  const loc  =document.getElementById('f_loc').value;
+  const price=document.getElementById('f_price').value.trim();
+  const phone=document.getElementById('f_phone').value.trim();
+  const unit =document.getElementById('f_unit').value;
+  const name =document.getElementById('f_name').value.trim();
+  const desc =document.getElementById('f_desc').value.trim();
+
+  if(!title)             { showToast('⚠️ اكتب عنوان الإعلان'); return; }
+  if(!cat)               { showToast('⚠️ اختر الفئة'); return; }
+  if(!loc)               { showToast('⚠️ اختر الولاية'); return; }
+  if(!price||isNaN(price)){ showToast('⚠️ اكتب السعر'); return; }
+  if(phone.length<9)     { showToast('⚠️ رقم الهاتف غير صحيح'); return; }
+
+  ads.push({id:'ad_'+Date.now(),title,cat,loc,price:+price,unit,name:name||'بائع',phone,desc,date:Date.now(),mine:true});
+  save();
+
+  ['f_title','f_price','f_phone','f_name','f_desc'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f_cat').value='';
+  document.getElementById('f_loc').value='';
+
+  document.getElementById('oPost').classList.remove('open');
+  viewMode='all'; curCat='all'; curSearch='';
+  document.querySelectorAll('.cat').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.cat').classList.add('active');
+  document.getElementById('secTitle').textContent='📢 الإعلانات';
+  render(); showToast('✅ تم نشر إعلانك بنجاح!');
+}
+
+function openProfile(){
+  document.getElementById('myAdsCount').textContent=ads.filter(a=>a.mine).length;
+  document.getElementById('favCount').textContent=favs.length;
+  document.getElementById('oProfile').classList.add('open');
+}
+
+function setNav(btn){
+  document.querySelectorAll('.nitem').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function fmtN(n){ return Number(n).toLocaleString('ar-DZ'); }
+function timeAgo(ts){
+  const m=Math.floor((Date.now()-ts)/60000);
+  if(m<1) return 'الآن';
+  if(m<60) return 'منذ '+m+' دقيقة';
+  const h=Math.floor(m/60);
+  if(h<24) return 'منذ '+h+' ساعة';
+  return 'منذ '+Math.floor(h/24)+' يوم';
+}
+
+render();
+</script>
+</body>
+</html>
